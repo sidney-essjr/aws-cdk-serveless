@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+
+    .label-error {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            color: #f52f2f;
+        }
+    }
+
+    input {
+        height: 20px;
+        border: none;
+        outline-color: #114d4d;
+        padding: 10px;
+        font-size: 14px;
+        color: #114d4d;
+        background-color: #e0e4ce;
+        border-radius: 5px;
+    }
+
+    input::placeholder {
+        color: #6e9987;
+    }
+}

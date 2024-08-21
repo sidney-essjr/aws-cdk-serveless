@@ -1,0 +1,34 @@
+.navbar {
+    margin: auto;
+    width: 1024px;
+    height: 70px;
+    background-color: #114d4d;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    align-items: center;
+    border-radius: 0px 0px 5px 5px;
+
+    a {
+        padding: 12px;
+        text-align: center;
+        width: 120px;
+        border-radius: 5px;
+    }
+
+    a:not(:last-child) {
+        color: #6e9987;
+        background-color: #e0e4ce;
+        transition: 0.3s;
+    }
+
+    a:last-child {
+        margin-left: 50px;
+        color: #e0e4ce;
+        font-size: 20px;
+    }
+
+    a:not(:last-child):hover {
+        color: #114d4d;
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@aws-amplify/auth": "^6.3.13",
+    "aws-amplify": "^6.5.0"
+  }
+}

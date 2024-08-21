@@ -1,0 +1,20 @@
+.container {
+    width: 400px;
+    margin: auto;
+    padding: 60px 20px 20px 20px;
+    text-align: center;
+
+    img {
+        width: 360px;
+        padding: 20px;
+    }
+
+    p {
+        margin: 20px;
+        place-content: center;
+        background-color: #8e909035;
+        width: 360px;
+        border-radius: 5px;
+        height: 200px;
+    }
+}

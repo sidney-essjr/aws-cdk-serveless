@@ -1,0 +1,28 @@
+@url = https://dx9kv7e286.execute-api.us-east-1.amazonaws.com/prod/
+@token = eyJraWQiOiJHR3RUb2ZSaFpselwvbkJZblVqeUNOVmFlSzdacUcwMzdPaytNUjBMWWRYST0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3NDU4ZDRlOC0yMDExLTcwZDAtNDI3Yy02MTg5MGZhMWJmOWYiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbnMiXSwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX3hIR2ozbXBJaiIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6InNvdXphSnVuaW9yIiwib3JpZ2luX2p0aSI6ImM0YzE2NjRhLWVjM2MtNGMyZS1hYWNmLTMxMzM0MGYxZmIwOSIsImF1ZCI6IjNiNHRkZG9qNGlka3FtMWdlNGRuYmhxcGNwIiwiZXZlbnRfaWQiOiI1ZWQ1YTkwMC01YTgwLTRjYzQtOWNiZi0xOTYzNzExODU2YWUiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTcyMzU3NDY2NSwicGhvbmVfbnVtYmVyIjoiKzU1NDg5OTE3Nzk0ODgiLCJleHAiOjE3MjM1NzgyNjQsImlhdCI6MTcyMzU3NDY2NSwianRpIjoiMjc2NzAwNTMtNjU4Ny00ZGVmLWE3MWQtMzI4ZThhNWRjMzNmIiwiZW1haWwiOiJzaWRuZXkuZS5zLnMuanJAZ21haWwuY29tIn0.Ezx3cOQvBTSNOF7d8BIwQ4OWbjNYUb35MKJ4PshjEtQf_m4AJaWoLf22v9fStTaxvTK8hzPDAx0Jm3xKOJ-mNCoU9G56esjEwMY8uZf4zgOHNP0QpGnsE8GnouGGhgpYzf0PCMHfByeRQRCYv-FGKkNKj1TtX0iV1v-zSUpIArLtrHZnf_FHxz-wcC4m8REKhDdSHurvtddkOCzSVLpnYk52RvsCyhB6O77JFVB22n2CCe5MNjcaO6XRXkU47gNOJune0RZZSF9jb_zZUw1Je0fkRbeZ_tEVpOzp-ojytzM7so3CaaFe67tYb2bU310ql3WVi3F8mJuZWFCrft1qdQ
+
+
+GET {{url}}spaces?id=f0a89dfc-0e04-481c-8d1e-01515ab9d488
+Authorization: {{token}}
+###
+GET {{url}}spaces
+Authorization: {{token}}
+###
+POST {{url}}spaces
+Content-Type: application/json
+
+{
+    "location": "Brazil",
+    "name": "Home"
+}
+###
+PUT {{url}}spaces?id=7478d1c6-9491-4723-b1b9-85ba0819a935
+Content-Type: application/json
+
+{
+    "location": "Germany"
+}
+###
+DELETE {{url}}spaces?id=7478d1c6-9491-4723-b1b9-85ba0819a935
+Authorization: {{token}}
+###
