@@ -1,4 +1,4 @@
-import { fetchAuthSession, signIn, signOut } from "@aws-amplify/auth";
+import { fetchAuthSession, getCurrentUser, signIn, signOut } from "@aws-amplify/auth";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
 import { AuthStack } from "../../../../../space-finder/outputs.json";
@@ -44,6 +44,11 @@ export async function authLogout() {
       console.error("Error logging out", error.message);
     }
   }
+}
+
+export async function getAuthenticatedUser() {
+  const data = await getCurrentUser();
+  return data;
 }
 
 async function generateTemporaryCredentials(jwtToken: string) {

@@ -1,21 +1,20 @@
 import { NavLink } from "react-router-dom";
-import { UserLogin } from "../authentication/context/AuthContext";
 import useAuth from "../authentication/hooks/useAuth";
 import { authLogout } from "../authentication/services/authService";
 import styles from "./styles.module.css";
 
-function handleLogout(setUserLogin: (userLogin: UserLogin) => void) {
-  authLogout();
-  setUserLogin({ username: "", credentials: null, signInOutput: null });
-}
-
 export default function Navbar() {
-  const { setUserLogin } = useAuth();
-  const { userLogin } = useAuth();
+  const { setUserLogin, userLogin } = useAuth();
+
+  function handleLogout() {
+    authLogout();
+    setUserLogin(null);
+  }
+
   function renderLoginLogout() {
     if (userLogin?.username) {
       return (
-        <NavLink to="/" onClick={() => handleLogout(setUserLogin)}>
+        <NavLink to="/" onClick={handleLogout}>
           {userLogin.username}
         </NavLink>
       );

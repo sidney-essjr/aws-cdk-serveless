@@ -2,7 +2,7 @@ import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../../common/input";
 import useAuth from "../../hooks/useAuth";
-import { authLogin } from "../../services/authService";
+import { authLogin, getAuthenticatedUser } from "../../services/authService";
 import styles from "./styles.module.css";
 
 export default function FormLogin() {
@@ -19,10 +19,11 @@ export default function FormLogin() {
       const username = formData.get("username")?.toString();
       const password = formData.get("password")?.toString();
       if (username && password) {
-        const response = await authLogin({ username, password });
-        if (response?.credentials && response?.signInOutput) {
+        await authLogin({ username, password });
+        const user = await getAuthenticatedUser();
+        if (user) {
+          setUserLogin(user);
           navigate("/spaces");
-          setUserLogin(response);
         } else {
           setInfoLogin("username or password is invalid");
         }

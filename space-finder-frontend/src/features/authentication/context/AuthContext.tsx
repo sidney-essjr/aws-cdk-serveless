@@ -1,21 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
-import { SignInOutput } from "@aws-amplify/auth";
-
-export interface AwsCredentialIdentity {
-  accessKeyId: string;
-  secretAccessKey: string;
-  sessionToken?: string; // Opcional, se usando sessões temporárias
-}
-
-export interface UserLogin {
-  credentials: AwsCredentialIdentity | null;
-  signInOutput: SignInOutput | null;
-  username: string;
-}
+import { AuthUser } from "@aws-amplify/auth";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { getAuthenticatedUser } from "../services/authService";
 
 interface AuthContextProps {
-  userLogin: UserLogin | null;
-  setUserLogin: (userLogin: UserLogin) => void;
+  userLogin: AuthUser | null;
+  setUserLogin: (userLogin: AuthUser | null) => void;
 }
 
 const initialState: AuthContextProps = {
@@ -26,7 +15,19 @@ const initialState: AuthContextProps = {
 export const AuthContext = createContext<AuthContextProps>(initialState);
 
 export default function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [userLogin, setUserLogin] = useState<UserLogin | null>(null);
+  const [userLogin, setUserLogin] = useState<AuthUser | null>(null);
+
+  useEffect(() => {
+    async function getUser() {
+      const data = await getAuthenticatedUser();
+      if (data) {
+        setUserLogin(data);
+      } else {
+        setUserLogin(null);
+      }
+    }
+    getUser();
+  }, []);
 
   return (
     <AuthContext.Provider
