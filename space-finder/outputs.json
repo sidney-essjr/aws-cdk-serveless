@@ -8,14 +8,14 @@
   "UiDeploymentStack": {
     "SpacesFinderUrl": "d3h73ie14pcxl.cloudfront.net"
   },
-  "LambdaStack": {
-    "ExportsOutputFnGetAttSpacesLambdaA5F923A4ArnE59FF2BB": "arn:aws:lambda:us-east-1:637423447599:function:LambdaStack-SpacesLambdaA5F923A4-a5Bk86Svk7a8"
-  },
   "AuthStack": {
     "ExportsOutputFnGetAttSpaceUserPool6AB542DCArnC2E21F85": "arn:aws:cognito-idp:us-east-1:637423447599:userpool/us-east-1_xHGj3mpIj",
     "SpaceUserPoolId": "us-east-1_xHGj3mpIj",
     "SpaceUserPoolClientId": "3b4tddoj4idkqm1ge4dnbhqpcp",
     "SpaceItentityPoolId": "us-east-1:a95a644d-9b63-46d1-9f9e-277ecd5bf3cd"
+  },
+  "LambdaStack": {
+    "ExportsOutputFnGetAttSpacesLambdaA5F923A4ArnE59FF2BB": "arn:aws:lambda:us-east-1:637423447599:function:LambdaStack-SpacesLambdaA5F923A4-a5Bk86Svk7a8"
   },
   "ApiStack": {
     "SpacesApiEndpoint36C4F3B6": "https://dx9kv7e286.execute-api.us-east-1.amazonaws.com/prod/"

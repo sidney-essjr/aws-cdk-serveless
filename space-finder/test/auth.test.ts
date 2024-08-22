@@ -5,11 +5,11 @@ async function testAuth() {
   const service = new AuthService();
   const loginResult = await service.login("souzaJunior", "Sessj5901@");
   const idToken = await service.getIdToken();
-  // console.log(idToken);
-  const credentials = await service.generateTemporaryCredentials();
+  console.log(idToken);
+  // const credentials = await service.generateTemporaryCredentials();
   // console.log(credentials)
-  const buckets = await listBuckets(credentials);
-  console.log(buckets);
+  // const buckets = await listBuckets(credentials);
+  // console.log(buckets);
 }
 
 async function listBuckets(credentials: any) {

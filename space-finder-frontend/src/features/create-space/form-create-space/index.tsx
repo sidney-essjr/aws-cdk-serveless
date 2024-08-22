@@ -17,7 +17,9 @@ export default function FormCreateSpace({
 }) {
   const ref = useRef<HTMLFormElement>(null);
   const [info, setInfo] = useState<string>("");
-  const { userLogin } = useAuth();
+  const { credentials } = useAuth();
+
+  console.log(credentials);
 
   function clearFormFields(formData: FormData) {
     formData.set("name", "");
@@ -37,9 +39,8 @@ export default function FormCreateSpace({
     if (ref.current) {
       const formData = new FormData(ref.current);
       if (formData.get("photo") && formData.get("name") && formData.get("location")) {
-        //send data to backend
         const data = extractFormData(formData);
-        createSpace(data, { userCredentials: userLogin?.credentials ?? null });
+        createSpace(data, { userCredentials: credentials });
         clearFormFields(formData);
       } else {
         setInfo("All fields are required");

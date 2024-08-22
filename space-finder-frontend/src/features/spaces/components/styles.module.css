@@ -1,0 +1,42 @@
+.container {
+  width: 800px;
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .space {
+    width: 47%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+}

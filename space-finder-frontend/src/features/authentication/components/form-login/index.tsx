@@ -9,7 +9,16 @@ export default function FormLogin() {
   const ref = useRef<HTMLFormElement>(null);
   const [infoLogin, setInfoLogin] = useState<string>("");
   const navigate = useNavigate();
-  const { setUserLogin } = useAuth();
+  const { setUserLogin, setCredentials } = useAuth();
+
+  async function handleAuth(username: string, password: string) {
+    const resp = await authLogin({ username, password });
+    if (resp?.credentials) {
+      setCredentials(resp.credentials);
+    }
+    const user = await getAuthenticatedUser();
+    return user;
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -19,8 +28,7 @@ export default function FormLogin() {
       const username = formData.get("username")?.toString();
       const password = formData.get("password")?.toString();
       if (username && password) {
-        await authLogin({ username, password });
-        const user = await getAuthenticatedUser();
+        const user = await handleAuth(username, password);
         if (user) {
           setUserLogin(user);
           navigate("/spaces");

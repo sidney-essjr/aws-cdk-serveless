@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { getSpaces } from "../features/spaces/services/api";
 import CreateSpacePage from "../pages/create-space";
 import HomePage from "../pages/home";
 import LoginPage from "../pages/login";
@@ -30,17 +32,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/spaces",
+        ErrorBoundary: () => <div>Problemas com o carregamento de dados!</div>,
         element: (
-          <ProtectedRoute>
-            <SpacesPage />,
-          </ProtectedRoute>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProtectedRoute>
+              <SpacesPage />
+            </ProtectedRoute>
+          </Suspense>
         ),
+        loader: async () => await getSpaces(),
       },
       {
         path: "/profile",
         element: (
           <ProtectedRoute>
-            <ProfilePage />,
+            <ProfilePage />
           </ProtectedRoute>
         ),
       },

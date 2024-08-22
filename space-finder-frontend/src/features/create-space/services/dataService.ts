@@ -1,8 +1,11 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { DataStack } from "../../../../../space-finder/outputs.json";
+import { DataStack, ApiStack } from "../../../../../space-finder/outputs.json";
 import { awsRegion } from "../../authentication/config/amplify";
-import { AwsCredentialIdentity } from "../../authentication/context/AuthContext";
 import { FormDataProps } from "../form-create-space";
+import { AwsCredentialIdentity } from "../../authentication/context/AuthContext";
+import { fetchAuthSession } from "@aws-amplify/auth";
+
+const SPACE_URL = ApiStack.SpacesApiEndpoint36C4F3B6 + "/spaces";
 
 export default async function createSpace(
   { location, name, photo }: FormDataProps,
@@ -11,11 +14,32 @@ export default async function createSpace(
   if (!userCredentials) {
     throw new Error("User credentials are required");
   }
+
   if (!photo) {
     throw new Error("Photo is required");
   }
   const uploadUrl = await uploadPublicFile(photo, { userCredentials });
-  console.log("Upload URL", uploadUrl);
+
+  const jwtToken = (await fetchAuthSession()).tokens?.idToken?.toString() ?? "";
+
+  const postResult = await fetch(SPACE_URL, {
+    method: "POST",
+    headers: {
+      "Authorization": jwtToken,
+    },
+    body: JSON.stringify({
+      location,
+      name,
+      photoUrl: uploadUrl,
+    }),
+  });
+
+  if (!postResult.ok) {
+    throw new Error("Failed to create space");
+  }
+  const space = await postResult.json();
+
+  return space.id;
 }
 
 async function uploadPublicFile(
@@ -37,7 +61,7 @@ async function uploadPublicFile(
 
   const command = new PutObjectCommand({
     Bucket: DataStack.SpaceFinderPhotosBucketName,
-    Key: file.name,
+    Key: file.name.split(" ").join("_"),
     ACL: "public-read",
     Body: file,
   });

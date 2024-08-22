@@ -22,14 +22,10 @@ export class ApiStack extends Stack {
 
     const api = new RestApi(this, "SpacesApi");
 
-    const authorizer = new CognitoUserPoolsAuthorizer(
-      this,
-      "SpacesApliAutorizer",
-      {
-        cognitoUserPools: [props.userPool],
-        identitySource: "method.request.header.Authorization",
-      }
-    );
+    const authorizer = new CognitoUserPoolsAuthorizer(this, "SpacesApiAutorizer", {
+      cognitoUserPools: [props.userPool],
+      identitySource: "method.request.header.Authorization",
+    });
 
     authorizer._attachToApi(api);
 
@@ -48,25 +44,9 @@ export class ApiStack extends Stack {
     };
 
     const spacesResource = api.root.addResource("spaces", optionsWithCors);
-    spacesResource.addMethod(
-      "GET",
-      props.spacesLambdaIntegration,
-      optionsWithAuth
-    );
-    spacesResource.addMethod(
-      "POST",
-      props.spacesLambdaIntegration,
-      optionsWithAuth
-    );
-    spacesResource.addMethod(
-      "PUT",
-      props.spacesLambdaIntegration,
-      optionsWithAuth
-    );
-    spacesResource.addMethod(
-      "DELETE",
-      props.spacesLambdaIntegration,
-      optionsWithAuth
-    );
+    spacesResource.addMethod("GET", props.spacesLambdaIntegration, optionsWithAuth);
+    spacesResource.addMethod("POST", props.spacesLambdaIntegration, optionsWithAuth);
+    spacesResource.addMethod("PUT", props.spacesLambdaIntegration, optionsWithAuth);
+    spacesResource.addMethod("DELETE", props.spacesLambdaIntegration, optionsWithAuth);
   }
 }
